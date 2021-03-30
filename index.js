@@ -3,23 +3,60 @@ const Discord = require('discord.js');
 const bot = new Discord.Client();
 const TOKEN = process.env.TOKEN;
 
+const BOT_USER_ID = "826461220495556616";
+
 bot.login(TOKEN);
+
+
+const react_msg = "react to this message with :sos: to open a new ticket";
+const emoji_sos = "🆘";
 
 bot.on('ready', () => {
   console.info(`Logged in as ${bot.user.tag}!`);
+
+  bot.guilds.forEach((guild) => {
+    let channel = bot.channels.find(channel => channel.name === "Ticket");
+
+    if(channel == null){
+      channel = guild.createChannel("Ticket", {
+        type: "text"
+      }).then(channel => {
+        channel.send(react_msg).then(msg => {
+          msg.react(emoji_sos)
+        })
+      });
+    }
+  });
 });
 
-bot.on('message', msg => {
-  if (msg.content === 'ping') {
-    msg.reply('pong');
-    msg.channel.send('pong');
-
-  } else if (msg.content.startsWith('!kick')) {
-    if (msg.mentions.users.size) {
-      const taggedUser = msg.mentions.users.first();
-      msg.channel.send(`You wanted to kick: ${taggedUser.username}`);
-    } else {
-      msg.reply('Please tag a valid user!');
-    }
+bot.on("messageReactionAdd", (msg, user) => {
+  console.log(user + " reacted with " + msg.emoji.name );
+  if(msg.message.author.id === BOT_USER_ID && msg.emoji.name === emoji_sos){
+    console.log(user.username + " Reacted");
   }
+});
+
+bot.on('raw', packet => {
+  // We don't want this to run on unrelated packets
+  if (!['MESSAGE_REACTION_ADD', 'MESSAGE_REACTION_REMOVE'].includes(packet.t)) return;
+  // Grab the channel to check the message from
+  const channel = bot.channels.get(packet.d.channel_id);
+  // There's no need to emit if the message is cached, because the event will fire anyway for that
+  if (channel.messages.has(packet.d.message_id)) return;
+  // Since we have confirmed the message is not cached, let's fetch it
+  channel.fetchMessage(packet.d.message_id).then(message => {
+    // Emojis can have identifiers of name:id format, so we have to account for that case as well
+    const emoji = packet.d.emoji.id ? `${packet.d.emoji.name}:${packet.d.emoji.id}` : packet.d.emoji.name;
+    // This gives us the reaction we need to emit the event properly, in top of the message object
+    const reaction = message.reactions.get(emoji);
+    // Adds the currently reacting user to the reaction's users collection.
+    if (reaction) reaction.users.set(packet.d.user_id, bot.users.get(packet.d.user_id));
+    // Check which type of event it is before emitting
+    if (packet.t === 'MESSAGE_REACTION_ADD') {
+      bot.emit('messageReactionAdd', reaction, bot.users.get(packet.d.user_id));
+    }
+    if (packet.t === 'MESSAGE_REACTION_REMOVE') {
+      bot.emit('messageReactionRemove', reaction, bot.users.get(packet.d.user_id));
+    }
+  });
 });
