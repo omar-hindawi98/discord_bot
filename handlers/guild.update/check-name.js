@@ -6,6 +6,6 @@ module.exports.handler = (bot, before, after) => {
         let guild_id = after.id;
         let new_name = after.name;
 
-        db.guild.findOneAndUpdate({guild_id: guild_id}, {name: new_name});
+        db.guild.findOneAndUpdate({guild_id: guild_id}, {name: new_name}).then();
     }
 };

@@ -1,12 +1,13 @@
 const message_ticket = require('./msg-ticket');
 const Config = require('../../config/bot.config');
+const everyoneRole = require('./../../modules/roles/everyone-role');
 
 module.exports = (bot, guild) => {
     // Get ticket channel
-    let channel = bot.channels.filter( channel => channel.name === Config.ticket_channel.name && channel.type === "text");
+    let channel = guild.channels.filter( channel => channel.name === Config.ticket_channel.name && channel.type === "text");
 
     // Get everyone id
-    let everyone_role = guild.roles.find(role => role.name === "@everyone");
+    let everyone_role = everyoneRole(guild);
 
     // Init new channel
     if(channel.size <= 0){

@@ -8,5 +8,8 @@ module.exports = botConfig = {
         name: "ticket",
         msg: "react to this message with :sos: to open a new ticket",
         emoji: "🆘"
+    },
+    ticket_category: {
+        name: "tickets"
     }
 };

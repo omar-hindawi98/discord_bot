@@ -1,13 +1,14 @@
 const BOT_USER_ID = process.env.BOT_USER_ID;
 const Config = require('./../../config/bot.config');
 
+const create_ticket = require('./../../modules/ticket/create-ticket');
+
 module.exports.handler = (bot, msg, user) => {
     if(msg.message.author.id === BOT_USER_ID
         && msg.emoji.name === Config.ticket_channel.emoji
         && user.id !== BOT_USER_ID){
         console.log("reacted");
-        // Remove reaction from message
-        // TODO
+        // TODO: remove reaction from message
         /*
         msg.createReactionCollector((reaction, userReact) =>
             reaction.emoji.name === Config.ticket_channel.emoji
@@ -15,6 +16,6 @@ module.exports.handler = (bot, msg, user) => {
          */
 
         // Send a message to user
-        // TODO
+        create_ticket(bot, msg.message.channel.guild, user);
     }
 };
