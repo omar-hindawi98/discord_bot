@@ -5,7 +5,7 @@ const botConfig = require('./../config/db.config');
 const Guild = mongoose.model(
     "Guild",
     new mongoose.Schema({
-        id: String, // Id for guild
+        guild_id: String,
         name: String, // Guild name
         ticket_limit: {
             type: Number,
@@ -19,7 +19,15 @@ const Guild = mongoose.model(
         active_tickets: [{
             type: ObjectId,
             ref: 'Ticket'
-        }]
+        }],
+        joined: {
+            type: Date,
+            default: Date.now()
+        },
+        active: {
+            type: Boolean,
+            default: true
+        }
     }, {collection: 'guilds'})
 );
 

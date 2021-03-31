@@ -5,7 +5,8 @@ const Ticket = mongoose.model(
     "Ticket",
     new mongoose.Schema({
         id:  {
-            ObjectId,
+            type: ObjectId,
+            index: true,
             auto: true
         },
         guild: {

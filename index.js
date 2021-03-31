@@ -42,6 +42,8 @@ bot.on('message', (msg) => {
   }
 });
 bot.on("guildUpdate", (before, after) => Events.guild_update(bot, before, after));
+bot.on("guildCreate", (guild) => Events.guild_create(bot, guild));
+
 
 /**
  * Fix for event handling
