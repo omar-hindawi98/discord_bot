@@ -14,7 +14,14 @@ const Ticket = mongoose.model(
             ref: 'Guild'
         },
         description: String,
-        user: String, // User id
+        userinfo: {
+            username: String,
+            steamid: String
+        },
+        ticketinfo: {
+            region: String,
+            biome: String
+        },
         registered: {
             type: Date,
             default: Date.now()
