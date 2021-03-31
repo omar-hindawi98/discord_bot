@@ -5,6 +5,7 @@ const text_message = require("./textMsg");
 const direct_message = require("./direct-msg");
 const guild_update = require("./guild-update");
 const guild_create = require("./guild-create");
+const guild_delete = require("./guild-delete");
 
 module.exports = {
     ready,
@@ -12,5 +13,6 @@ module.exports = {
     text_message,
     direct_message,
     guild_update,
-    guild_create
+    guild_create,
+    guild_delete
 };

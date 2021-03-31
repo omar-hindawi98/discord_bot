@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const {ObjectId} = mongoose;
-const botConfig = require('./../config/db.config');
+const botConfig = require('./../config/bot.config');
 
 const Guild = mongoose.model(
     "Guild",
@@ -10,7 +10,8 @@ const Guild = mongoose.model(
         ticket_limit: {
             type: Number,
             min: 1,
-            max: botConfig.ticket_limit
+            max: botConfig.ticket_limit.max,
+            default: 2
         },
         resolved_tickets: [{
             type: ObjectId,

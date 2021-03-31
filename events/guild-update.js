@@ -2,7 +2,8 @@
 const path = require("path").join(__dirname, "../handlers/guild.update");
 const handlers = [];
 require("fs").readdirSync(path).forEach(function(file) {
-    handlers.push(require("./../handlers/guild.update/" + file).handler);
+    if(file.endsWith(".js"))
+        handlers.push(require("./../handlers/guild.update/" + file).handler);
 });
 
 module.exports = (bot, before, after) => {
