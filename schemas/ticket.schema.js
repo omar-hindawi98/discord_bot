@@ -23,6 +23,10 @@ const Ticket = mongoose.model(
             type: Date,
             default: Date.now()
         },
+        bumped: {
+            type: Date,
+            default: Date.now()
+        },
         resolved: {
             type: Date,
             default: null

@@ -3,16 +3,13 @@ const Discord = require('discord.js');
 const Events = require('./events/index');
 const db = require("./schemas");
 const dbConfig = require("./config/db.config");
+const botConfig = require('./config/bot.config');
+const bump_old_ticket = require('./modules/ticket/bump-old-tickets');
 
 // Constants
 const TOKEN = process.env.TOKEN;
 
-// Bot init
 const bot = new Discord.Client();
-bot.login(TOKEN).catch((err) => {
-  throw new Error(`Failed to initialize bot: ${err}`);
-});
-
 // Connect to db
 db.mongoose
   .connect(`mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}`, {
@@ -74,4 +71,17 @@ bot.on('raw', packet => {
       bot.emit('messageReactionRemove', reaction, bot.users.get(packet.d.user_id));
     }
   });
+});
+
+
+bot.login(TOKEN).then(() => {
+  /**
+   * Interval for checking old tickets
+   */
+  bump_old_ticket(bot);
+  setInterval(() => {
+    bump_old_ticket(bot);
+  }, botConfig.interval_check);
+}).catch((err) => {
+  throw new Error(`Failed to initialize bot: ${err}`);
 });

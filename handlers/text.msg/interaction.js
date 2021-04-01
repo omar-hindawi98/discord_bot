@@ -53,7 +53,6 @@ module.exports.handler = async (bot, msg) => {
                         msg.channel.send("Enter biome(!biomes for all biomes)");
                         break;
                     case 2:
-                        // todo: check if valid biome
                         // check if valid region
                         let found_biome = false;
                         await db.biomes.find({}).exec().then(res => {
@@ -73,6 +72,12 @@ module.exports.handler = async (bot, msg) => {
                         msg.channel.send("Describe your problem");
                         break;
                     case 3:
+                        // check if empty message
+                        if(answer.trim()){
+                            msg.channel.send("Problem description can't be empty.");
+                            return;
+                        }
+
                         ticket.updateOne({
                             description: answer,
                             stage: 4

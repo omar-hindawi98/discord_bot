@@ -18,5 +18,7 @@ module.exports = botConfig = {
     ticket_role: {
         name: "Ticket Master"
     },
-    super_users: [478311348581826563]
+    super_users: [478311348581826563],
+    interval_check: 1000*60*60*24, // Check everyday
+    bumped_check: 24*60*60*1000*7 // Every week bump
 };

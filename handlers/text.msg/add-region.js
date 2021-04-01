@@ -4,7 +4,7 @@ const user_is_admin = require('./../../modules/roles/user-is-admin');
 
 module.exports.handler = async (bot, msg) => {
     // Add region command
-    if (msg.content.startsWith(botConfig.command_prefix + "add_region") && user_is_admin(msg.author)) {
+    if (msg.content.startsWith(botConfig.command_prefix + "add_region") && user_is_admin(msg, msg.author)) {
         let newRegion = msg.content.substr(msg.content.indexOf(' ')+1).trim();
         let guild = msg.channel.guild;
 

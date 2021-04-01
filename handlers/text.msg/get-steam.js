@@ -5,11 +5,22 @@ const user_is_ticket_master = require('./../../modules/roles/user-is-ticket-mast
 
 module.exports.handler = async (bot, msg) => {
     // Add region command
-    if (msg.content.startsWith(botConfig.command_prefix + "steam") && user_is_ticket_master(msg.author)) {
-        let test = await steam.grap_profile("STEAM_0:0:34197882");
+    if (msg.content.startsWith(botConfig.command_prefix + "steam") && user_is_ticket_master(msg, msg.author)) {
+        let steamid = null;
+        await db.tickets.findOne({
+            channel_id: msg.channel.id
+        }).exec().then(res => {
+            if(res)
+                steamid = res.steamid;
+        }).catch();
+
+        if(!steamid)
+            return;
+
+        let test = await steam.grap_profile(steamid);
+
         if(test && test.response.players.length > 0) {
             let player = test.response.players[0];
-            console.log(player);
             const embed = {
                 color: 0x0099ff,
                 title: 'Steam profile',
