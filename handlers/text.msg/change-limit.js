@@ -1,10 +1,11 @@
 const dbConfig = require('./../../config/bot.config');
 const db = require('./../../schemas');
+const user_is_admin = require('./../../modules/roles/user-is-admin');
 
 module.exports.handler = (bot, msg) => {
     const command = dbConfig.command_prefix + "set_limit";
 
-    if (msg.content.startsWith(command)){
+    if (msg.content.startsWith(command) && user_is_admin(msg.author)){
         const args = msg.content.slice(command.length).trim().split(' ');
         if(args.length === 1 && args[0]){
             const val = Number(args[0]);

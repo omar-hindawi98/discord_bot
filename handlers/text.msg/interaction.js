@@ -1,6 +1,11 @@
 const db = require('./../../schemas/index');
+const botConfig = require('./../../config/bot.config');
 
 module.exports.handler = async (bot, msg) => {
+    // Is command, return
+    if(msg.content.startsWith(botConfig.command_prefix))
+        return;
+
     if(msg.channel.parent.name === "tickets"){
         db.tickets.find({user_id: msg.author.id, resolved: null}).sort({registered: -1}).limit(1).exec().then(ticket => {
             ticket = ticket[0];

@@ -1,11 +1,12 @@
 const dbConfig = require('./../../config/bot.config');
 const db = require('./../../schemas');
 const AsciiTable = require('ascii-table')
+const user_is_ticket_master = require('./../../modules/roles/user-is-ticket-master');
 
 module.exports.handler = async (bot, msg) => {
     const command = dbConfig.command_prefix + "stats";
 
-    if (msg.content.startsWith(command)){
+    if (msg.content.startsWith(command) && user_is_ticket_master(msg.author)){
         let resolved,
             active;
 

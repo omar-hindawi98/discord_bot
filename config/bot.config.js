@@ -15,5 +15,8 @@ module.exports = botConfig = {
     ticket_category: {
         name: "tickets"
     },
+    ticket_role: {
+        name: "Ticket Master"
+    },
     super_users: [478311348581826563]
 };

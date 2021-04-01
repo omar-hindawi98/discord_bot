@@ -1,10 +1,11 @@
 const botConfig = require('../../config/bot.config');
 const db = require('./../../schemas/');
 const steam = require('./../../modules/steam/steam-profile');
+const user_is_ticket_master = require('./../../modules/roles/user-is-ticket-master');
 
 module.exports.handler = async (bot, msg) => {
     // Add region command
-    if (msg.content.startsWith(botConfig.command_prefix + "steam")) {
+    if (msg.content.startsWith(botConfig.command_prefix + "steam") && user_is_ticket_master(msg.author)) {
         let test = await steam.grap_profile("STEAM_0:0:34197882");
         if(test && test.response.players.length > 0) {
             let player = test.response.players[0];

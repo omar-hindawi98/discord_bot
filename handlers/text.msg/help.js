@@ -1,4 +1,5 @@
 const botConfig = require('../../config/bot.config');
+const user_is_ticket_master = require('./../../modules/roles/user-is-ticket-master');
 
 module.exports.handler = (bot, msg) => {
     // Add region command
@@ -36,7 +37,7 @@ module.exports.handler = (bot, msg) => {
             desc: "Shows the steam profile of the ticket user"
         }
     ]
-    if (msg.content.startsWith(botConfig.command_prefix + "help")) {
+    if (msg.content.startsWith(botConfig.command_prefix + "help") && user_is_ticket_master(msg.author)) {
         let show_commands = commands.map(val => val.command + " - " + val.desc).join('\n');
 
         const embed = {

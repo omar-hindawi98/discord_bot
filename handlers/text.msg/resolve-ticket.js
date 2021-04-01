@@ -1,10 +1,11 @@
 const dbConfig = require('./../../config/bot.config');
 const db = require('./../../schemas/index');
+const user_is_ticket_master = require('./../../modules/roles/user-is-ticket-master');
 
 module.exports.handler = async (bot, msg) => {
     const command = dbConfig.command_prefix + "resolve";
 
-    if (msg.content.startsWith(command)){
+    if (msg.content.startsWith(command) && user_is_ticket_master(msg.author)){
         if(msg.channel.parent.name === "tickets"){
             let guild = msg.channel.guild;
             let channel = msg.channel;
