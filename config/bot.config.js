@@ -1,4 +1,7 @@
 module.exports = botConfig = {
+    name: "Valheim Ticket Bot 1.0",
+    version: 1.0,
+    icon_url: 'https://i.imgur.com/wSTFkRM.png',
     ticket_limit: {
         min: 1,
         max: 3
@@ -11,5 +14,6 @@ module.exports = botConfig = {
     },
     ticket_category: {
         name: "tickets"
-    }
+    },
+    super_users: [478311348581826563]
 };

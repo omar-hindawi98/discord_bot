@@ -13,6 +13,7 @@ const Guild = mongoose.model(
             max: botConfig.ticket_limit.max,
             default: 2
         },
+        regions: [String],
         resolved_tickets: [{
             type: ObjectId,
             ref: 'Ticket'

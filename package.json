@@ -9,6 +9,8 @@
   "author": "Michiel Mulders",
   "license": "ISC",
   "dependencies": {
+    "ascii-table": "0.0.9",
+    "axios": "^0.21.1",
     "discord.js": "^11.5.1",
     "dotenv": "^8.2.0",
     "mongodb": "^3.6.5",

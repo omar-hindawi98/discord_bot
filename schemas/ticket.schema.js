@@ -4,24 +4,21 @@ const {ObjectId} = mongoose;
 const Ticket = mongoose.model(
     "Ticket",
     new mongoose.Schema({
-        id:  {
-            type: ObjectId,
-            index: true,
-            auto: true
-        },
         guild: {
             type: ObjectId,
             ref: 'Guild'
         },
+        channel_id: String,
         description: String,
-        userinfo: {
-            username: String,
-            steamid: String
+        stage: {
+            type: Number,
+            default: 0
         },
-        ticketinfo: {
-            region: String,
-            biome: String
-        },
+        user_id: String,
+        username: String,
+        steamid: String,
+        region: String,
+        biome: String,
         registered: {
             type: Date,
             default: Date.now()
@@ -30,7 +27,6 @@ const Ticket = mongoose.model(
             type: Date,
             default: null
         },
-        closed_user: Boolean, // If ticket has been revoked by user
         resolved_by: String // Resolved by which admin
     }, {collection: 'tickets'})
 );

@@ -11,5 +11,6 @@ db.mongoose = mongoose;
 
 db.guild = require("./guild.schema");
 db.tickets = require("./ticket.schema");
+db.biomes = require('./biomes.schema');
 
 module.exports = db;
