@@ -26,6 +26,9 @@ db.mongoose
     throw new Error(`Failed to connect to database: ${err}`);
   });
 
+// Todo: open end-point with OAUTH2 for communication between website & bot
+// Todo: open end-point for communication between website & database
+
 /**
  * Event handling redirection
  */
