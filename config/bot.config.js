@@ -20,6 +20,7 @@ module.exports = botConfig = {
         name: "Ticket Master"
     },
     super_users: [478311348581826563],
-    interval_check: 1000*60*60*24, // Check everyday
-    bumped_check: 24*60*60*1000*7 // Every week bump
+    interval_check: 1000*60*60, // Check every hour
+    bumped_check: 24*60*60*1000*7, // Every week bump
+    remove_ticket_time: 24*60*60*1000*7 // Time that the ticket will be removed after the first bump
 };

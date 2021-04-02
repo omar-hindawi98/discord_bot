@@ -12,7 +12,7 @@ module.exports = (bot) => {
                         bumped: Date.now()
                     }).exec().then().catch();
 
-                    bot.channels.get(ticket.channel_id).send("Bump, this ticket seems to be old.");
+                    bot.channels.get(ticket.channel_id).send("Bump, this ticket seems to be old. It will be removed from the system if not resolved in 1 week.");
                 }
             });
         });

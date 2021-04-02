@@ -25,6 +25,7 @@ db.mongoose
 
 // Todo: open end-point with OAUTH2 for communication between website & bot
 // Todo: open end-point for communication between website & database
+// Todo: Remove old tickets
 // Todo: Test all functions
 
 /**
