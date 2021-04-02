@@ -3,8 +3,8 @@ const db = require('./../../schemas/index');
 const user_is_ticket_master = require('./../../modules/roles/user-is-ticket-master');
 
 Date.prototype.yyyymmdd = function() {
-    var mm = this.getMonth() + 1; // getMonth() is zero-based
-    var dd = this.getDate();
+    let mm = this.getMonth() + 1; // getMonth() is zero-based
+    let dd = this.getDate();
 
     return [this.getFullYear(),
         (mm>9 ? '' : '0') + mm,

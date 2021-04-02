@@ -1,3 +1,4 @@
+// TODO: Move config to database, continously watch database for changes
 module.exports = botConfig = {
     name: "Valheim Ticket Bot 1.0",
     version: 1.0,
