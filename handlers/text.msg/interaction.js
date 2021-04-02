@@ -73,7 +73,7 @@ module.exports.handler = async (bot, msg) => {
                         break;
                     case 3:
                         // check if empty message
-                        if(answer.trim()){
+                        if(answer.trim() === ''){
                             msg.channel.send("Problem description can't be empty.");
                             return;
                         }

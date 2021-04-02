@@ -12,7 +12,7 @@ module.exports.handler = async (bot, msg) => {
 
         await db.guild.findOne({
             guild_id: msg.channel.guild.id
-        }).populate('resolved_tickets', 'active_tickets').exec().then(res => {
+        }).exec().then(res => {
             resolved = res.resolved_tickets.length;
             active = res.active_tickets.length;
 
